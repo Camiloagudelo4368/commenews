@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col">
+        <img src="/assets/img/burger.png">
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12">
+        <br>
+        <form action="/api/burger" method="post">
+            <div class="input-group mb-3">
+                <input name="burger_name" type="text" class="form-control" placeholder="Enter your most desired burger" required
+                    aria-label="Type your most wished burger" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline" type="submit" id="btnSubmit"><img
+                            src="/assets/img/plus.svg"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+<div class="row justify-content-center">
+    <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
+        <h5>Eat one please</h5>
+        {{#each burgers}}
+        <div class="divList">
+            <div class="input-group">
+                <div class="form-control text-left burger_name">
+                    {{id}}. {{burger_name}}
+                </div>
+                <div class="align-middle">
+                    <button class="btn btn-outline btnDevour" style="padding: 4px 3px 0 0; border:none" type="button"><img
+                            data-id="{{id}}" src="/assets/img/eatBurger.png" title="Eat this burger"></button>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
+        <h5>You ate these burgers</h5>
+        {{#each devoured}}
+        <div class="divList">
+            <div class="input-group">
+                <div class="form-control text-left burger_name">
+                    {{id}}. {{burger_name}}
+                </div>
+                <div>
+                    <button class="btn btn-outline btnDelete" style="padding: 4px 0 0 0;  border:none" type="button"><img
+                            data-id="{{id}}" src="/assets/img/close.svg" title="Remove burger"></button>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

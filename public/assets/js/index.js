@@ -22,10 +22,6 @@ $(document).on("click", ".btnSaveNote", event => {
     })
         // With that done
         .then(function (data) {
-            // Log the response
-            // console.log(data);
-            // Empty the notes section
-            // $("#notes").empty();
             getNotes(id);
         });
 
@@ -55,10 +51,6 @@ $(document).on("click", ".btnUpdateNote", event => {
     })
         // With that done
         .then(function (data) {
-            // Log the response
-            // console.log(data);
-            // Empty the notes section
-            // $("#notes").empty();
             getNotes(artId);
         });
 
@@ -82,15 +74,11 @@ $(document).on("click", ".btnDeleteNote", event => {
     })
         // With that done
         .then(function (data) {
-            // Log the response
-            // console.log(data);
-            // Empty the notes section
-            // $("#notes").empty();
             getNotes(artId);
         });
 });
 
-$(document).on("click", ".newComment", event => {    
+$(document).on("click", ".newComment", event => {
     const id = $(event.target).attr("data-id")
     $("#notes").empty();
     getNewNote(id);
@@ -98,7 +86,7 @@ $(document).on("click", ".newComment", event => {
     // $(".newComment").hide()
 });
 
-$(document).on("click", ".btnCancel", event => {    
+$(document).on("click", ".btnCancel", event => {
     const id = $(event.target).attr("data-id")
     getNotes(id)
 });
@@ -122,7 +110,7 @@ function getNotes(id) {
                     </button>
                     <div id="collapseNote${element._id}" class="collapse" aria-labelledby="headingNote${element._id}" data-parent="#accordion">
                         <div class="container-fluid">
-                            <div class="row portfolioRow">
+                            <div class="row articleRow">
                                 <div class="col-12">
                                     <form action="">
                                         <div class="form-group">
@@ -168,7 +156,7 @@ function CreateNewCommentButton(id) {
 function getNewNote(id) {
     const html = `
             <div class="container-fluid">
-                <div class="row portfolioRow">
+                <div class="row articleRow">
                     <div class="col-12">
                         <form action="">
                             <div class="form-group">

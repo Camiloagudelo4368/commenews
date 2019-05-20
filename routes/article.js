@@ -118,8 +118,8 @@ router.post("/note/:id", function (req, res) {
 // Route for saving/updating an Article's associated Note
 router.put("/note/:id", function (req, res) {
   // Create a new note and pass the req.body to the entry
-  console.log("body",req.body)
-  Note.findOneAndUpdate({_id: req.params.id }, { $set : {title : req.body.title, body: req.body.body}})
+  console.log("body", req.body)
+  Note.findOneAndUpdate({ _id: req.params.id }, { $set: { title: req.body.title, body: req.body.body } })
     .then(function (dbNote) {
       // If we were able to successfully update an Article, send it back to the client
       res.json(dbNote);
@@ -133,9 +133,10 @@ router.put("/note/:id", function (req, res) {
 
 // delete the note from notes model
 router.delete("/note/:id/:artId", (req, res) => {
+
   Article.findOneAndUpdate({ _id: req.params.artId }, { $pull: { notes: req.params.id } })
-    // .then(note => res.json(note)).catch(err => res.json(err))
-  Note.remove({ _id: req.params.id }).then(note => res.json(note)).catch(err => res.json(err))
+  // .then(note => res.json(note)).catch(err => res.json(err))
+  Note.deleteOne({ _id: req.params.id }).then(note => res.json(note)).catch(err => res.json(err))
 })
 
 module.exports = router;

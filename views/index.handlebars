@@ -1,40 +1,17 @@
-{{!-- <div class="row justify-content-center">
-    <div class="col">
-        <img src="/assets/img/burger.png">
-    </div>
-</div> --}}
-{{!-- <div class="row justify-content-center">
-    <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12">
-        <br>
-        <form action="/api/burger" method="post">
-            <div class="input-group mb-3">
-                <input name="burger_name" type="text" class="form-control" placeholder="Enter your most desired burger"
-                    required aria-label="Type your most wished burger" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-outline" type="submit" id="btnSubmit"><img
-                            src="/assets/img/plus.svg"></button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div> --}}
 <br>
 {{#each articles}}
 <div class="row">
-    <div class="row portfolioRow">
+    <div class="row articleRow">
         <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 text-right">
-            <img class="card-img-top portfolio_image" src="{{img}}">
+            <img class="card-img-top articleImage" src="{{img}}">
         </div>
         <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-            <h3 class="portfolioHeader"><a href="{{link}}">{{title}}</a></h3>
-            <p class="portfolioDescription">{{description}}</p>
+            <h3 class="articuleHeader"><a href="{{link}}">{{title}}</a></h3>
+            <p class="articleDescription">{{description}}</p>
             <button id="{{_id}}" type="button" class="btn btn-primary btn-sm btnComment">
-                Comment
+                Comments
             </button>
         </div>
-    </div>
-    <div class="row portfolioRow">
-
     </div>
 </div>
 {{/each}}
@@ -49,9 +26,6 @@
     </div>
 </div>
 
-<!-- Button trigger modal -->
-
-
 <!-- Modal -->
 <div class="modal fade" id="modalNotes" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -65,68 +39,8 @@
             <div class="modal-body">
                 <div id="accordion">
                     <div id="notes" class="card">
-                        {{!-- {{#each articles}}
-                        <!-- LIRI -->
-                        <button class="btn btn-link text-left text-primary" data-toggle="collapse"
-                            data-target="#collapseLiri" aria-expanded="true" aria-controls="collapseLiri">
-                            <div class="card-header" id="headingLiri">
-                                <h5 class="mb-0">
-                                    {{title}} </h5>
-                            </div>
-                        </button>
-                        <div id="collapseLiri" class="collapse" aria-labelledby="headingLiri" data-parent="#accordion">
-                            <div class="container-fluid">
-                                <div class="row portfolioRow">
-                                    <div class="col-12">
-                                        <form action="">
-                                            <div class="form-group">
-                                                <label for="">Title</label>
-                                                <input type="text" class="form-control" name="" id=""
-                                                    aria-describedby="helpId" placeholder="" required>
-                                                <br>
-                                                <div class="form-group">
-                                                    <label for="">Comment</label>
-                                                    <textarea class="form-control" name="" id="" rows="3"
-                                                        required></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex justify-content-end">
-                                                <button type="button" class="btn btn-primary">Save</button>
-                                                &NonBreakingSpace;
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </div>
-                                            <br>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{/each}} --}}
                     </div>
                 </div>
-
-                {{!-- <div class="container-fluid">
-                    {{#each notes}}
-                    <div class="row">
-                        <div class="row portfolioRow">
-                            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 text-right">
-                                <img class="card-img-top portfolio_image" src="{{img}}">
-                            </div>
-                            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-                                <h3 class="portfolioHeader"><a href="{{title}}">{{title}}</a></h3>
-                                <p class="portfolioDescription">{{description}}</p>
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                    data-target="#modelId">
-                                    Comment
-                                </button>
-                            </div>
-                        </div>
-                        <div class="row portfolioRow">
-
-                        </div>
-                    </div>
-                    {{/each}}
-                </div> --}}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
@@ -134,7 +48,3 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-
-</script>

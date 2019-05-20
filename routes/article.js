@@ -35,7 +35,7 @@ router.get("/", function (req, res) {
       result.link = $(this).children(".entry-header").children("h3").children("a").attr("href");
       console.log(result)
       options = { upsert: true, new: true, setDefaultsOnInsert: true };
-      var query = { title :result.title /* query */ };
+      var query = { title: result.title /* query */ };
       // Create a new Article using the `result` object built from scraping
       // Article.create(result)
       Article.findOneAndUpdate(query, result, options)
@@ -59,7 +59,7 @@ router.get("/", function (req, res) {
 // Route for getting all Articles from the db
 router.get("/articles", function (req, res) {
   // Grab every document in the Articles collection
-  Article.find({}).sort({_id:-1})
+  Article.find({}).sort({ _id: -1 })
     .then(function (dbArticle) {
       // If we were able to successfully find Articles, send them back to the client
       // res.json(dbArticle);
@@ -80,26 +80,30 @@ router.get("/articles/:id", function (req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   Article.findOne({ _id: req.params.id })
     // ..and populate all of the notes associated with it
-    .populate("note")
+    .populate('notes')
     .then(function (dbArticle) {
       // If we were able to successfully find an Article with the given id, send it back to the client
-      res.json(dbArticle);
+      // console.log(dbArticle)
+      res.send(dbArticle);
     })
     .catch(function (err) {
       // If an error occurred, send it to the client
-      res.json(err);
+      res.send(err);
     });
 });
 
+
+
 // Route for saving/updating an Article's associated Note
-router.post("/articles/:id", function (req, res) {
+router.post("/note/:id", function (req, res) {
   // Create a new note and pass the req.body to the entry
   Note.create(req.body)
     .then(function (dbNote) {
       // If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note
       // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-      return Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+      // return Article.findOneAndUpdate({}, { $push: { notes: dbNote._id } }, { new: true });
+      return Article.findOneAndUpdate({ _id: req.params.id }, { $push: { notes: dbNote._id } }, { new: true });
     })
     .then(function (dbArticle) {
       // If we were able to successfully update an Article, send it back to the client
@@ -110,5 +114,28 @@ router.post("/articles/:id", function (req, res) {
       res.json(err);
     });
 });
+
+// Route for saving/updating an Article's associated Note
+router.put("/note/:id", function (req, res) {
+  // Create a new note and pass the req.body to the entry
+  console.log("body",req.body)
+  Note.findOneAndUpdate({_id: req.params.id }, { $set : {title : req.body.title, body: req.body.body}})
+    .then(function (dbNote) {
+      // If we were able to successfully update an Article, send it back to the client
+      res.json(dbNote);
+    })
+    .catch(function (err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
+
+
+// delete the note from notes model
+router.delete("/note/:id/:artId", (req, res) => {
+  Article.findOneAndUpdate({ _id: req.params.artId }, { $pull: { notes: req.params.id } })
+    // .then(note => res.json(note)).catch(err => res.json(err))
+  Note.remove({ _id: req.params.id }).then(note => res.json(note)).catch(err => res.json(err))
+})
 
 module.exports = router;
